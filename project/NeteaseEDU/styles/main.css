@@ -1,0 +1,119 @@
+/* 通用样式 */
+.wrap{width:1205px;margin:0 auto;}
+.left{float:left;}
+.right{float:right;}
+.pos-r{position:relative;}
+body{min-width:1205px;}
+.clearfix:after{content:'.';display:block;clear:both;height:0;overflow:hidden;visibility:hidden;}
+.clearfix{zoom:1;}
+/* 登录框 */
+.mask{height:100%;width:100%;position:fixed;z-index:999;background-color:rgba(0,0,0,.8);display:none;}
+.mask .login{position:absolute;left:50%;top:50%;margin-left:-193px;margin-top:-144px;width:387px;height:288px;background-color:#fff;padding:30px 0 0 40px;}
+.close-btn{position:absolute;top:10px;right:8px;width:10px;height:10px;background:url(../images/icon.png) no-repeat 0 0;cursor:pointer;}
+.login h2{margin-bottom:20px;font:18px "微软雅黑";}
+#pwd{margin-bottom:0;}
+.login .error{color:red;text-align:center;width:295px;height:29px;line-height:29px;}
+.login input{width:283px;height:43px;line-height:43px;font-size:16px;padding-left:10px;display:block;border:1px solid #dfdfdf;margin-bottom:15px;box-shadow:inset 2px 2px #f1f1f1;background-color:#fafafa;}
+.login input.login-btn{width:295px;height:46px;background-color:#28af4c;border:none;box-shadow:2px 2px #d5e3da;color:#fff;font-size:16px;cursor:pointer;}
+/* 顶部通知栏 */
+.m-notice{height:36px;line-height:36px;background-color:#f3f3f3;overflow:hidden;transition:1s height ease;}
+.m-notice a{margin-left:7px;color:#21a557;}
+.m-notice a:hover{text-decoration:underline;}
+.m-notice .remind{padding-left:15px;margin-right:2px;background:url(../images/icon.png) no-repeat -64px 14px;cursor:pointer;}
+/* 标题栏 */
+.m-head{height:89px;line-height:89px;}
+.hd-logo{margin-right:31px;}
+.hd-logo img{margin-top:33px;vertical-align:top;}
+
+#follow{display:inline-block;width:54px;height:21px;line-height:21px;text-align:center;margin-right:14px;background-color:#21a557;color:#fff;border-radius:2px;cursor:pointer;}
+#follow:hover{background-color:#2fb556;}
+.follow .followed-btn{display:none;height:19px;line-height:19px;padding:0 7px 0 22px;margin-right:14px;border:1px solid #efefef;background:url(../images/icon.png) no-repeat -56px -114px #f8f8f8;border-radius:2px;}
+.followed-btn:hover{background-color:#fff;}
+.followed-btn .followed{padding-right:9px;margin-right:8px;border-right:1px solid #ccc;}
+.followed-btn .cancel{color:#999;}
+.followed-btn .cancel:hover{text-decoration:underline;color:#21a557;cursor:pointer;}
+.m-head .nav li{display:inline;padding-right:54px;font-size:16px;}
+.m-head .nav a:hover{color:#39a030;}
+.m-head .search{position:absolute;right:14px;top:35px;width:19px;height:19px;background:url(../images/icon.png) no-repeat 0 -51px;}
+.m-head .search:hover{background:url(../images/icon.png) no-repeat -54px -51px;cursor:pointer;}
+/* 轮播头图 */
+.m-slide{width:100%;position:relative;}
+.m-slide li{width:100%;position:absolute;}
+.m-slide img{width:100%;}
+.m-slide .control{position:absolute;bottom:20px;width:100%;text-align:center;z-index:3;}
+.control i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:11px;background-color:#fff;}
+.control i.active{background-color:#333;}
+/* 课程介绍 */
+.m-course{height:295px;}
+.m-course li{float:left;box-sizing:border-box;height:295px;width:423px;padding:61px 79px 59px 104px;}
+.m-course .open{background:url(../images/open.png) no-repeat 4px 68px;}
+.m-course .study{background:url(../images/study.png) no-repeat 4px 68px;}
+.m-course .mooc{width:359px;padding-right:13px;background:url(../images/mooc.png) no-repeat 4px 68px;}
+.m-course h2{font-size:22px;line-height:20px;padding-bottom:9px;}
+.m-course p{font-size:14px;line-height:24px;padding-bottom:24px;}
+.m-course a{color:#39a030;}
+.m-course a:hover{text-decoration:underline;}
+/* 相片展示 */
+.m-photo{text-align:center;white-space:nowrap;border-top:2px solid #f8f8f8;background-color:#f8f8f8;}
+.m-photo li{display:inline}
+.m-photo img{width:19.84%;}
+/* 课程列表 */
+.m-content{padding:80px 0 120px;background-color:#f8f8f8;}
+.m-content .tabs li{display:inline-block;width:200px;height:50px;line-height:50px;box-shadow:1px 1px 1px 1px #d4d3d3;background-color:#fff;font-size:20px;text-align:center;}
+.m-content .tabs li.active{background-color:#39a030;}
+.tabs a{display:block;}
+.tabs li.active a{color:#fff;}
+.main .course-list{padding:9px 2px 0 0;width:980px;height:1291px;}
+.course-list li{position:relative;float:left;margin:20px 20px 0 0;width:223px;height:227px;border:1px solid #fff;box-shadow:1px 1px 1px #f1f1f1;background-color:#fff;cursor:pointer;}
+
+
+.course-list li div.more{display:none;width:479px;height:238px;position:absolute;top:-11px;left:-10px;z-index:10;box-shadow:0 0 1px 1px #c1c0c0;background-color:#fff;}
+.more img{width:223px;height:126px;margin-left:10px;margin-top:11px;}
+.more div{width:226px;margin-top:15px;}
+.more div h3{font-size:18px;margin-bottom:17px;}
+.more div div{margin-bottom:13px;padding-left:16px;background:url(../images/icon.png) no-repeat 5px -132px;color:#666;}
+.more div span{display:block;margin-bottom:8px;color:#666;}
+.more div span{color:#666;}
+.more p{height:38px;padding:22px 33px 23px 21px;margin-top:155px;background-color:#f8f8f8;font-size:14px;overflow:hidden;}
+
+.course-list li img{margin-bottom:10px;width:223px;height:126px;}
+.course-list li h3:hover{color:#21a557;}
+.course-list li h3{margin-bottom:10px;padding-left:5px;color:#333;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.course-list li span{padding-left:5px;color:#a8a8a8;}
+.course-list li div.count{margin:10px 0 10px 5px;padding-right:3px;display:table;text-indent:12px;line-height:16px;border:1px solid #dddddd;border-radius:2px;color:#999;text-align:right;background:url(../images/icon.png) no-repeat 1px -132px;}
+.course-list li strong{margin-bottom:10px;padding-left:5px;color:#ff3f00;font-weight:bold;}
+.page{float:right;margin-right:15px;}
+.page a{float:left;height:20px;line-height:20px;width:20px;margin-right:8px;text-align:center;}
+.page a:hover{background-color:#9dd8b1;color:#fff;}
+.page a.selected{color:#39a030;}
+.page a.selected:hover{background-color:#f8f8f8;cursor:default;}
+.page a.prevPage{width:30px;height:20px;background:url(../images/icon.png) no-repeat -20px -112px #9dd8b1;}
+.page a.nextPage{width:30px;height:20px;background:url(../images/icon.png) no-repeat -54px -98px #9dd8b1;}
+.player-mask{position:fixed;z-index:9999;width:100%;height:100%;background-color:rgba(0,0,0,.8);display:none;}
+.player-mask .player{position:absolute;padding:29px 30px 40px 31px;left:50%;top:50%;margin-left:-444px;margin-top:-303px;width:889px;height:607px;background-color:#fff;}
+.player-mask .player h2{font-size:18px;}
+.intro{margin-top:-47px;box-shadow:0 1px 1px 1px #d4d3d3;}
+.intro h3{width:223px;height:55px;line-height:55px;background-color:#fff;border-bottom:1px solid #ddd;font-size:16px;text-indent:20px;}
+.intro .intro-video{padding:20px 0 0 22px;width:201px;height:153px;background-color:#fff;}
+.intro-video p{font-size:14px;margin-bottom:9px;}
+#video-player{cursor:pointer;}
+.topten{margin-top:21px;box-shadow:0 1px 1px 1px #d4d3d3;}
+.topten h3{width:223px;height:56px;line-height:55px;background-color:#fff;border-bottom:1px solid #ddd;font-size:16px;text-indent:20px;}
+.topten .top-list{padding:20px 0 0 20px;width:203px;height:720px;background-color:#fff;}
+.top-list li{margin-bottom:20px;height:50px;}
+.top-list h4{margin-bottom:12px;font-size:14px;text-indent:12px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.top-list div{float:left;width:50px;height:50px;overflow:hidden;}
+.top-list span{color:#999;margin-left:12px;padding-left:16px;background:url(../images/icon.png) no-repeat 1px -132px;}
+/* 页脚信息 */
+.g-footer{height:262px;background-color:#2c3339;color:#bebfc0;}
+.ft-logo img{margin:92px 0 28px 50px;}
+.g-footer .copyright{margin-left:50px;font-size:12.5px;}
+.copyright p{margin-bottom:10px;}
+.g-footer .about{margin:81px 109px 0 0;}
+.g-footer .about dl{float:left;padding-right:98px;line-height:29.17px;}
+.about dl.our{padding-right:67px;}
+.about a{color:#bebfc0;}
+.about a:hover{text-decoration:underline;}
+.about dt{font-size:12.5px;}
+.about dd{font-size:14.58px;}
+.about .weibo{padding-right:31px;background:url(../images/icon.png) no-repeat 41px -105px;}
