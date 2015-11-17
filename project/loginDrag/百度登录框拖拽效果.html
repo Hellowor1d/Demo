@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta  charset = "UTF-8"/>
+	<title>百度登陆框拖拽效果</title>
+	<style type="text/css">
+	html,body {width: 100%;
+		height: 100%;
+		background: url(images/baidu_demo.png) #fff top center no-repeat;padding: 0;margin:0;font-size: 12px;font-family: "微软雅黑";position:relative;
+	}
+	.link { position: absolute;
+		right: 0px;
+		padding: 10px 40px;
+	}
+	#mask{
+		width: 100%;
+		height: 100%;
+		background-color: #000;
+		opacity: 0.4;
+		z-index: 8000;
+		position: absolute;
+		top: 0px;left: 0px;
+		 filter: Alpha(opacity=40);
+		 display: none;
+	}
+	.login-box{
+		width: 380px;height: auto;display: block;
+		position: absolute;z-index: 9000;
+		margin: 0 auto;
+		border: 1px solid #D5D5D5;
+		background: #fff;
+		display: none;
+	}
+	.login-box a{text-decoration: none;}
+	.login-title {
+		height: 48px;line-height: 48px; 
+		padding:0px 20px;color: #535353;
+		font-size: 16px;
+		border-bottom: 1px solid #efefef;
+		background: #f5f5f5;	
+		cursor: move;
+	}
+	.close-btn {
+		width: 16px;height: 16px;display: block;
+		position: absolute;top: 12px;right: 20px;
+		background: url(images/close_def.png) no-repeat;
+		cursor: pointer;
+	}
+	.close-btn:hover{background:url(images/close_hov.png);}
+	.login-content{
+		padding:15px 20px;
+	}
+	.login-content input{
+		width: 100%;height: 40px;
+		margin: 0px;padding:0px;
+		border: 1px solid #d5d5d5;
+		font-size: 16px;color: #c1c1c1;
+		text-indent: 35px;
+		outline: none;
+		margin-bottom: 20px;	
+	}
+	#login-user{
+		background: url(images/input_username.png) no-repeat 2px ;
+		margin-top: 15px;
+	}
+
+	#login-psw{
+		background: url(images/input_password.png) no-repeat 2px;
+		margin-bottom: 0;
+	}
+	.login-submit{
+		width: 100%;height: 50px;background: #3b7ae3;border:none;font-size: 16px;
+		
+		display: block;text-align: center;line-height: 50px;
+	}
+	.login-submit a{
+		color: white;
+	}
+	.login-forget{height: 40px;line-height: 40px;
+		text-align: right;	
+	}
+	.login-register{
+		right: 20px;
+		height: 40px;line-height: 40px;
+		text-align: right;
+	}
+	</style>
+</head>
+<body>
+	<a id="link" class="link" href="javascript:showLogin()" >登录</a>
+	<div id="mask"></div>
+	<div id="login-box" class="login-box">
+
+		<div id="login-title" class="login-title">
+		登录通行证                                                		
+		<a class="close-btn" href="javascript:hiddenLogin()">	
+		</a>
+		</div>
+
+		<div class="login-content">
+		<input type="input" id="login-user" class="login-user" placeholder="手机/邮箱/用户名"/>
+		<input type="text" id="login-psw" class="login-psw" placeholder="密码"/>
+		<div class="login-forget">
+			<a href="#">忘记密码</a>
+		</div>
+		<div class="login-submit">
+			<a href="#">登录</a>
+		</div>
+
+		<div class="login-register">
+			<a href="#">立即注册</a>
+		</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+//通过id,获取元素对象
+function g(id) {return document.getElementById(id);}
+//设置浮层自动居中函数（el = element )
+function autoCenter(el) {
+	//网页可视区域宽度和高度
+	var bodyW = document.documentElement.clientWidth;    
+	var bodyH = document.documentElement.clientHeight;
+	//元素的宽度和高度
+	var elW = el.offsetWidth;
+	var elH = el.offsetHeight;
+	//设置元素居中时的宽高
+	el.style.left = (bodyW - elW)/2 + "px";
+	el.style.top= (bodyH - elH)/2 + "px";
+}
+	//扩展元素显示到全部可视区域
+function fillToBody(el) {
+	el.style.width = document.documentElement.clientWidth;
+	el.style.height = document.documentElement.clientHeight;
+}
+//鼠标事件--1：处理鼠标在标题栏上按下（计算鼠标相对拖拽元素的左上角的坐标，并且标记为元素可拖动）
+	var mouseOffsetX = 0;		//鼠标偏移
+	var mouseOffsetY = 0;
+
+	var isDraging = false;
+	g("login-title").addEventListener("mousedown",function(e){
+	//下面这种写法兼容IE里不会直接传递一个鼠标事件对象，而是包含在window这个大对象下面
+		var e = e || window.event;
+	//用按下鼠标时，（鼠标相对于页面左边和顶边的便宜）用鼠标当前在页面中的坐标减去登陆浮层距离页面左边的距离就是
+		mouseOffsetX = e.pageX - g("login-box").offsetLeft;
+		mouseOffsetY = e.pageY - g("login-box").offsetTop;
+		isDraging = true;
+	});
+// 鼠标事件-2 -鼠标运动时（要检测元素是否可标记为移动，如果是，则更新元素的位置到当前鼠标的位置【ps:要减去第一步中获得的偏移】）
+		document.onmousemove = function (e){
+			var e = e || window.event;
+			var mouseX = e.pageX;	//获取鼠标当前位置
+			var mouseY = e.pageY;
+
+			var moveX = 0;
+			var moveY = 0;
+		if (isDraging === true) {
+			moveX = mouseX - mouseOffsetX;
+			moveY = mouseY - mouseOffsetY;
+		 //范围限定，moveX > 0,并且 moveX  <（页面最大宽度 - 浮层的宽度）
+		var pageWidth = document.documentElement.clientWidth;
+		var pageHeight = document.documentElement.clientHeight;
+
+		var boxWidth = g("login-box").offsetWidth;
+		var boxHeight = g("login-box").offsetHeight;
+
+		var maxX =pageWidth - boxWidth;
+		var maxY = pageHeight -boxHeight;
+		//处理moveX小于0的情况
+		moveX = Math.min(maxX ,Math.max(0,moveX))
+		moveY = Math.min(maxY  ,Math.max(0,moveY ))
+
+		 	g("login-box").style.left = moveX + "px";
+		 	g("login-box").style.top= moveY+ "px";
+		}	
+		};
+//鼠标事件-3 -  以document 为对象，设置鼠标松开的时候（标记元素为不可拖动）
+document.onmouseup= function(){
+	isDraging = false;
+};
+
+function showLogin(){
+	g("mask").style.display="block";
+	g("login-box").style.display="block";
+	autoCenter(g("login-box"));
+}
+function hiddenLogin(){
+	g("mask").style.display="none";
+	g("login-box").style.display="none";
+}
+//	侦听浏览器窗口大小变化
+  	window.onresize = showLogin;
+</script>
+</html>
