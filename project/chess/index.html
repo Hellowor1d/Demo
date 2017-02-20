@@ -3,16 +3,28 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>我的五子棋</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mobi.css/1.1.0/mobi.min.css" />
+    <title>小小棋局</title>
+    <script src="http://libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
     <style>
-    body{
-        background: url(./background.jpg) fixed
-    }
+        body {
+            background: url(http://7xo9xp.com1.z0.glb.clouddn.com/image/bg/bg_chess.jpg) fixed
+        }
+        .btn{
+            margin:30px auto 0 auto;
+            width:300px;
+            line-height:45px;
+            font-size:25px;
+            background-color: mediumseagreen;
+            border-radius:5px;
+            text-align:center;
+            cursor:pointer
+        }
+        
         canvas {
-            position:absolute;
-            left:50%;
-            top:50%;
+             cursor:pointer;
+            position: absolute;
+            left: 50%;
+            top: 50%;
             display: block;
             margin-left: -375px;
             margin-top: -390px;
@@ -20,15 +32,84 @@
             background: #EEAD3F;
             box-shadow: -2px -2px 2px #EFEFEF, 5px 5px 5px #B9B9B9;
         }
+        /* music */
+        
+        @-webkit-keyframes reverseRotataZ {
+            0% {
+                -webkit-transform: rotateZ(0deg);
+            }
+            100% {
+                -webkit-transform: rotateZ(-360deg);
+            }
+        }
+        
+        @-webkit-keyframes rotataZ {
+            0% {
+                -webkit-transform: rotateZ(0deg);
+            }
+            100% {
+                -webkit-transform: rotateZ(360deg);
+            }
+        }
+        
+        #musicControl {
+             cursor:pointer;
+            position: fixed;
+            right: 20px;
+            top: 30px;
+            margin-top: 0;
+            display: inline-block;
+            z-index: 99999999
+        }
+        
+        #musicControl a {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            overflow: hidden;
+            background: url('./mcbg.png') no-repeat;
+            background-size: 100%;
+        }
+        
+        #musicControl a audio {
+            width: 100%;
+            height: 56px;
+        }
+        
+        #musicControl a.stop {
+            background-position: left bottom;
+        }
+        
+        #musicControl a.on {
+            background-position: 0px 1px;
+            -webkit-animation: reverseRotataZ 1.2s linear infinite;
+        }
+        
+        #music_play_filter {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 99999998;
+        }
     </style>
 </head>
 
 <body>
-
- <canvas id="chess" width="750px" height="750px">您的浏览器暂不支持canvas</canvas>
-
- <label class="btn"> AI 模式</label>
-   
+    <span id="musicControl">
+        <a id="mc_play" class="stop" onclick="play_music();">
+            <audio id="musicfx" loop="loop">
+                <source src="http://7xo9xp.com1.z0.glb.clouddn.com/music/bg/bg_chess.mp3" type="audio/mpeg">
+            </audio>
+        </a>
+ </span>
+    <canvas id="chess" width="750px" height="750px">您的浏览器暂不支持canvas</canvas>
+    <div class="btn" onclick="location.reload() ">
+       <span>重新开始</span> 
+        
+        </div>
     <script>
         var chess = document.getElementById('chess')
         var context = chess.getContext('2d')
@@ -127,7 +208,7 @@
 
         //为canvas加载背景图片
         var wallpaper = new Image()
-        wallpaper.src = "./wallpaper.jpg"
+        wallpaper.src = "http://7xo9xp.com1.z0.glb.clouddn.com/image/bg/bg_chessboard.jpg"
         wallpaper.onload = function () {
             context.drawImage(wallpaper, 0, 0, 750, 750)
             drawChessBoard()
@@ -259,7 +340,10 @@
                     }
                 }
             }
-            oneStep(u, v, false)
+            setTimeout(function () {
+                oneStep(u, v, false)
+            }, 600)
+
             chessData[u][v] = 2
             //对已经下的棋子进行检测，属于572种赢法中的某一种，以此k值进行计分
             for (var k = 0; k < count; k++) {
@@ -279,6 +363,41 @@
             }
 
         }
+        //音乐控制
+        function play_music() {
+            if ($('#mc_play').hasClass('on')) {
+                $('#mc_play audio').get(0).pause();
+                $('#mc_play').attr('class', 'stop');
+            } else {
+                $('#mc_play audio').get(0).play();
+                $('#mc_play').attr('class', 'on');
+            }
+            $('#music_play_filter').hide();
+            event.stopPropagation(); //阻止冒泡 
+        }
+
+        function just_play(id) {
+            $('#mc_play audio').get(0).play();
+            $('#mc_play').attr('class', 'on');
+            if (typeof (id) != 'undefined') {
+                $('#music_play_filter').hide();
+            }
+            event.stopPropagation(); //阻止冒泡 
+        }
+        // function is_weixn(){
+        //     return false;
+        //     var ua = navigator.userAgent.toLowerCase();
+        //     if(ua.match(/MicroMessenger/i)=="micromessenger") {
+        //         return true;
+        //     } else {
+        //         return false;
+        //     }
+        // }
+        // window.onload=function(){
+        //     if (!is_weixn()){
+        //         just_play();
+        //     }
+        // }
     </script>
 </body>
 
